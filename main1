@@ -1,0 +1,190 @@
+name = []
+phone = []
+email = []
+address = []
+namefav = []
+phonefav = []
+emailfav = []
+addresfav = []
+tasks = []
+l = []
+
+
+def main():
+    print("-----SMART HUB-----")
+    print('')
+    print("Choose among the 2 options below: ")
+    print('')
+    print("1. Create/Go to Contact List Book: ")
+    print("2. Create/Go to Daily Task Tracker: ")
+    print('')
+    choice = (input("Enter your choice: "))
+
+    if choice == '1':
+        print("Choose among the 3 options below: ")
+        print('')
+        print("1. Add new contacts: ")
+        print("2. Mark contacts as favourite: ")
+        print("3. View all contacts and favourite contacts: ")
+        print('')
+        c = int(input("Enter your choice: "))
+        if c == 1:
+            number = int(input("Enter the number of contacts you wish to add: "))
+            add_contact(number)
+        if c == 2:
+            fav()
+        if c == 3:
+            view()
+        # else:
+        #     print("Invalid choice, choose again")
+        #     main()
+    elif choice == '2':
+        print('Choose among the 2 options below:')
+        print('')
+        print("1. Add new tasks: ")
+        print("2. Mark tasks as completed: ")
+        print("3. Delete Tasks: ")
+        ch = int(input("Enter your choice: "))
+        if ch == 1:
+            num = int(input("Enter the number of tasks you wish to add: "))
+            add_task(num)
+        if ch == 2:
+            nnumber = int(input("Enter the number of tasks you wish to mark: "))
+            mark_complete(nnumber)
+        if ch == 3:
+            delete_task()
+
+
+def add_contact(n):
+    print('')
+    for i in range(n):
+        nm = (input(("Enter the name:")))
+        name.append(nm)
+        ph = int(input(("Enter the phone number:")))
+        phone.append(ph)
+        e = (input(("Enter the email address:")))
+        email.append(e)
+        a = (input(("Enter the address:")))
+        address.append(a)
+    print('')
+    print("The contacts added are: ")
+    for i in range(n):
+        print(f'Name: {name[i]} , Phone: {phone[i]} , Email: {email[i]} , Address: {address[i]}')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+def fav():
+    num = 0
+    print('')
+    choicee = int(input("Enter 1 to view contacts and 2 to add favourite contacts:"))
+    if choicee == 1:
+        for i in range(len(name)):
+            print(f' Name: {name[i]}, Phone: {phone[i]}, Email: {email[i]}, Address: {address[i]}')
+    elif choicee == 2:
+        num = int(input("Enter the number of contacts you wish to favourite:"))
+        for i in range(num):
+            favnm = input(("Enter the name of the contact you wish to favourite:"))
+        if favnm in name:
+            namefav.append(favnm)
+    print('')
+    print('Your favourite contacts are: ')
+    print('')
+    for item in namefav:
+        print(f'Name: {item}')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+def view():
+    print('')
+    print("All of your contacts are: ")
+    for i in range(len(name)):
+        print(f'Name: {name[i]}, Phone: {phone[i]}, Email: {email[i]}, Address: {address[i]}')
+
+    print('')
+    print('Your favourite contacts are: ')
+    print('')
+    for i in range(len(namefav)):
+        print(f'Name: {namefav[i]}')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+def add_task(n):
+    for i in range(n):
+        task = input("Enter the task:")
+        tasks.append(task)
+    print(f'You have added {n} tasks-')
+
+    for i in range(len(tasks)):
+        print(f'Task: {tasks[i]}')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+def mark_complete(n):
+    print(f'You currently have {len(tasks)} tasks:')
+    print("Enter the numbers of the tasks you have completed: ")
+    for i in range(n):
+        l.append(input())
+    for i in range(n):
+        tasks[(int(l[i]) - 1)] += "-done"
+    print('')
+    print('Updated tasks list now: ')
+    for i in range(len(tasks)):
+        print(f'Task: {tasks[i]}')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+def delete_task():
+    print('')
+    choice = int(input("Enter 1 if you wish to delete the completed tasks, else 0: "))
+    if choice == 1:
+        if len(l) == 0:
+            print("You haven't completed any tasks!")
+        else:
+            for index in sorted(l, reverse=True):
+                if 0 < int(index) <= len(tasks):
+                    tasks.pop(int(index) - 1)
+    else:
+        num = int(input("Enter the number of tasks you wish to delete: "))
+        print('')
+        print('Enter the numbers of the tasks you wish to delete:')
+        dell = []
+        for i in range(num):
+            nnumber = int(input())
+            dell.append(nnumber)
+
+        for index in sorted(dell, reverse=True):
+            if 0 < int(index) <= len(tasks):
+                tasks.pop(int(index) - 1)
+    print('')
+    print("The updated tasks list is:")
+    for i in range(len(tasks)):
+        print(f'Task: {tasks[i]}')
+    print('')
+    print("Press 1 to exit, 0 to return to main menu: ")
+    if int(input("Enter your choice: ")) == 1:
+        pass
+    else:
+        main()
+
+
+main()
